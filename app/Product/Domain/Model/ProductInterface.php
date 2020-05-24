@@ -7,13 +7,13 @@ interface ProductInterface
 {
     public function getGuid(): string;
 
-    public function setGuid(string $guid): self;
+    public function setGuid(string $guid): ProductInterface;
 
     public function getName(): string;
 
     public function getPrice(): int;
 
-    public function setPrice(int $price): self;
+    public function setPrice(int $price): ProductInterface;
 
-    public function setName(string $name): self;
+    public function setName(string $name): ProductInterface;
 }

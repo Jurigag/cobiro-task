@@ -18,7 +18,7 @@ class Price
 
     public function __construct(int $price)
     {
-        if ($price < 0) {
+        if ($price <= 0) {
             throw new ProductPriceException("Price should be higher than zero");
         }
 
