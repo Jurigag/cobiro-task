@@ -1,5 +1,6 @@
 <?php
 
+use App\Product\Application\Middleware\CreateProductMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/', 'ProductController@create')
-    ->middleware(\App\Product\Middleware\CreateProductMiddleware::class)
+    ->middleware(CreateProductMiddleware::class)
     ->name('product/create');

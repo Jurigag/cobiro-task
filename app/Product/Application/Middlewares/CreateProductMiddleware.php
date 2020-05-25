@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Product\Middleware;
+namespace App\Product\Application\Middleware;
 
+use App\Product\Domain\ValueObject\Name;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -10,15 +11,13 @@ class CreateProductMiddleware
 {
     private const MAX_PRICE = 4294967295;
     private const MIN_PRICE = 0;
-    private const MIN_LENGTH_NAME = 3;
-    private const MAX_LENGTH_NAME = 255;
 
     public function handle(Request $request, Closure $next)
     {
         $maxPrice = self::MAX_PRICE;
         $minPrice = self::MIN_PRICE;
-        $minLengthName = self::MIN_LENGTH_NAME;
-        $maxLengthName = self::MAX_LENGTH_NAME;
+        $minLengthName = Name::MIN_NAME_LENGTH;
+        $maxLengthName = Name::MAX_NAME_LENGTH;
 
         $request->validate([
             'price' => "required|between:$minPrice,$maxPrice|numeric",

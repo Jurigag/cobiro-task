@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace App\Product\Application\Listeners;
 
 use App\SharedKernel\Interfaces\Loggable;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class LoggableListener
 {

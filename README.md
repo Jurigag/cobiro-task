@@ -4,5 +4,5 @@ One endpoint to create product with DDD, CQRS and Laravel
 - Uses league tactician command bus
 - Self-validating value objects
 - Uses repository pattern
-- Users Factory pattern
+- Uses Factory pattern
 - Logging all domain events to separate file
