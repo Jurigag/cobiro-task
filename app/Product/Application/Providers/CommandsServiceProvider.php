@@ -21,10 +21,12 @@ class CommandsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $bus = $this->app->make(CommandBusInterface::class);
+
         foreach($this->commandsMap as $command => $handler)
         {
             $bus->addHandler($command, $handler);
         }
+
         $this->app->instance(CommandBusInterface::class, $bus);
     }
 }

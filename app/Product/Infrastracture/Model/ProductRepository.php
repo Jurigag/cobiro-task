@@ -12,11 +12,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 {
     public function save(Product $product): void
     {
-        $modelProduct = ProductModel::find($product->getGuid());
-
-        if (!$modelProduct) {
-            $modelProduct = new ProductModel();
-        }
+        $modelProduct = ProductModel::findOrNew($product->getGuid());
 
         $modelProduct->guid = $product->getGuid();
         $modelProduct->price = $product->getPrice()->getInternalPrice();
