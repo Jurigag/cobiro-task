@@ -1,6 +1,6 @@
 <?php
 
-use App\Product\Application\Middleware\CreateProductMiddleware;
+use App\Product\Application\Middlewares\CreateProductMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*

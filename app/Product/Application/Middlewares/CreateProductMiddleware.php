@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Product\Application\Middleware;
+namespace App\Product\Application\Middlewares;
 
 use App\Product\Domain\ValueObject\Name;
 use Closure;

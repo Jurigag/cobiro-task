@@ -6,6 +6,7 @@ namespace App\Product\Application\Command;
 use App\Product\Domain\Event\ProductCreatedEvent;
 use App\Product\Domain\Factory\ProductFactory;
 use App\Product\Domain\Model\ProductRepositoryInterface;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Guid\Guid;
 
@@ -21,11 +22,17 @@ class CreateProductCommandHandler
     protected $productRepository;
 
     /**
+     * @var Dispatcher
+     */
+    protected $eventDispatcher;
+
+    /**
      * CreateProductCommandHandler constructor.
      */
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, Dispatcher $eventDispatcher)
     {
         $this->productRepository = $productRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function handle(CreateProductCommand $command): void
@@ -37,7 +44,7 @@ class CreateProductCommandHandler
             $command->getName()
         );
         $this->productRepository->save($product);
-        event(new ProductCreatedEvent(
+        $this->eventDispatcher->dispatch(new ProductCreatedEvent(
             $guid,
             $product->getName()->getName(),
             $product->getPrice()->getFormattedPrice()

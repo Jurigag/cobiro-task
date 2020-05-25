@@ -8,6 +8,7 @@ use App\Product\Domain\Exception\ProductNameLengthException;
 use App\Product\Domain\Exception\ProductPriceException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Str;
 use Joselfonseca\LaravelTactician\CommandBusInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class ProductController extends Controller
         $this->commandBus = $commandBus;
     }
 
-    public function create(Request $request)
+    public function create(Request $request, ResponseFactory $responseFactory)
     {
         try {
             $guid = (string)Str::uuid();
@@ -41,9 +42,9 @@ class ProductController extends Controller
                 $guid
             ));
         } catch (ProductNameLengthException|ProductPriceException $e) {
-            return response()->json(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            return $responseFactory->json(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
-        return response()->json(['guid' => $guid], Response::HTTP_CREATED);
+        return $responseFactory->json(['guid' => $guid], Response::HTTP_CREATED);
     }
 }

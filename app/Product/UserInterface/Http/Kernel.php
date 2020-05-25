@@ -2,7 +2,7 @@
 
 namespace App\Product\UserInterface\Http;
 
-use App\Product\Middleware\CreateProductMiddleware;
+use App\Product\Application\Middlewares\CreateProductMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
