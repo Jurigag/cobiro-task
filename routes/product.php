@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/', 'ProductController@create')
     ->middleware(CreateProductMiddleware::class)
     ->name('product/create');
+
+Route::get('/{id}', 'ProductController@show')
+    ->name('product/show');

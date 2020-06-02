@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Product\Infrastracture\Model;
+namespace App\Product\Infrastructure\Model;
 
 use App\Product\Domain\Model\ProductRepositoryInterface;
 use App\Product\Domain\Product;
-use App\Product\Infrastracture\Model\Product as ProductModel;
+use App\Product\Infrastructure\Model\Product as ProductModel;
 use App\SharedKernel\Infrastructure\BaseRepository;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
@@ -15,8 +15,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $modelProduct = ProductModel::findOrNew($product->getGuid());
 
         $modelProduct->guid = $product->getGuid();
-        $modelProduct->price = $product->getPrice()->getInternalPrice();
-        $modelProduct->name = $product->getName()->getName();
+        $modelProduct->price = $product->getInternalPrice();
+        $modelProduct->name = $product->getName();
         $modelProduct->save();
     }
 }

@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Product\Application\Providers;
 
+use App\Product\Application\Query\Model\ReadProductRepositoryInterface;
 use App\Product\Domain\Model\ProductRepositoryInterface;
-use App\Product\Infrastracture\Model\ProductRepository;
+use App\Product\Infrastructure\Model\ProductRepository;
+use App\Product\Infrastructure\Model\ReadProductRepository;
 use Carbon\Laravel\ServiceProvider;
 
 /**
@@ -18,5 +20,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         parent::register();
 
         $this->app->singleton(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->singleton(ReadProductRepositoryInterface::class, ReadProductRepository::class);
     }
 }

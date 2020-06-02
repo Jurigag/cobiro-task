@@ -27,18 +27,28 @@ class CreateProductCommandHandler
     protected $eventDispatcher;
 
     /**
+     * @var ProductFactory
+     */
+    protected $productFactory;
+
+    /**
      * CreateProductCommandHandler constructor.
      */
-    public function __construct(ProductRepositoryInterface $productRepository, Dispatcher $eventDispatcher)
-    {
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        Dispatcher $eventDispatcher,
+        ProductFactory $productFactory
+    ) {
         $this->productRepository = $productRepository;
         $this->eventDispatcher = $eventDispatcher;
+        $this->productFactory = $productFactory;
     }
 
     public function handle(CreateProductCommand $command): void
     {
         $guid = $command->getGuid();
-        $product = ProductFactory::createNew(
+
+        $product = $this->productFactory->createNew(
             $guid,
             $command->getPrice(),
             $command->getName()
@@ -46,8 +56,9 @@ class CreateProductCommandHandler
         $this->productRepository->save($product);
         $this->eventDispatcher->dispatch(new ProductCreatedEvent(
             $guid,
-            $product->getName()->getName(),
-            $product->getPrice()->getFormattedPrice()
+            $product->getName(),
+            $product->getPrice(),
+            $product->getInternalPrice()
         ));
     }
 }

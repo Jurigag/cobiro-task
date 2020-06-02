@@ -10,7 +10,7 @@ use App\Product\Domain\ValueObject\Price;
 
 class ProductFactory
 {
-    public static function createNew(string $guid, float $price, string $name): Product
+    public function createNew(string $guid, float $price, string $name): Product
     {
         return new Product(
             $guid,
@@ -19,7 +19,7 @@ class ProductFactory
         );
     }
 
-    public static function createByModel(ProductInterface $product): Product
+    public function createByModel(ProductInterface $product): Product
     {
         return new Product(
             $product->getGuid(),

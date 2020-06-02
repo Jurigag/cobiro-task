@@ -42,13 +42,18 @@ class Product
         return $this->guid;
     }
 
-    public function getPrice(): Price
+    public function getPrice(): string
     {
-        return $this->price;
+        return $this->price->getFormattedPrice();
     }
 
-    public function getName(): Name
+    public function getInternalPrice(): int
     {
-        return $this->name;
+        return $this->price->getInternalPrice();
+    }
+
+    public function getName(): string
+    {
+        return $this->name->getName();
     }
 }

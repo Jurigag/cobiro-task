@@ -27,13 +27,19 @@ class ProductCreatedEvent extends BaseEvent
     protected $price;
 
     /**
+     * @var int
+     */
+    protected $internalPrice;
+
+    /**
      * ProductCreatedEvent constructor.
      */
-    public function __construct(string $guid, string $name, string $price)
+    public function __construct(string $guid, string $name, string $price, int $internalPrice)
     {
         $this->guid = $guid;
         $this->name = $name;
         $this->price = $price;
+        $this->internalPrice = $internalPrice;
     }
 
     public function getGuid(): string
@@ -49,6 +55,11 @@ class ProductCreatedEvent extends BaseEvent
     public function getPrice(): string
     {
         return $this->price;
+    }
+
+    public function getInternalPrice(): int
+    {
+        return $this->internalPrice;
     }
 
     public function getLoggableContent(): string

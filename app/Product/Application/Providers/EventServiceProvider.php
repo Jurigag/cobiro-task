@@ -3,6 +3,8 @@
 namespace App\Product\Application\Providers;
 
 use App\Product\Application\Listeners\LoggableListener;
+use App\Product\Domain\Event\ProductCreatedEvent;
+use App\Product\Infrastructure\Projectors\ProductProjector;
 use App\SharedKernel\Interfaces\Loggable;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -17,6 +19,15 @@ class EventServiceProvider extends ServiceProvider
         Loggable::class => [
             LoggableListener::class,
         ],
+    ];
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        ProductProjector::class,
     ];
 
     /**
