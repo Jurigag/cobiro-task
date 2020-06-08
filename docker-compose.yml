@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/var/www/cobiro
     ports:
-      - "80:80"
+      - "85:80"
   php:
     image: cobiro/php-xdebug:latest
     volumes:
