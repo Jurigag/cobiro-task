@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    image: cobiro/php-nginx:latest
+    volumes:
+      - .:/var/www/cobiro
+    ports:
+      - "80:80"
+  php:
+    image: cobiro/php-xdebug:latest
+    volumes:
+      - .:/var/www/cobiro
+  db:
+    image: mariadb
